@@ -222,11 +222,11 @@ async def play(_, message: Message):
             )
 
         file_name = get_file_name(audio)
-        title = "NaN"
-        thumb_name = "https://telegra.ph/file/8156d9a462cfe542bb11c.jpg"
+        title = "Audio Telegram"
+        thumb_name = "https://telegra.ph/file/d3cd0d8da27cb2f0b9a62.jpg"
         thumbnail = thumb_name
         duration = "NaN"
-        views = "NaN"
+        views = "NaN
 
         keyboard = InlineKeyboardMarkup(
             [
@@ -276,7 +276,7 @@ async def play(_, message: Message):
         )
         except Exception as e:
             title = "NaN"
-            thumb_name = "https://telegra.ph/file/a9d383d2e2ca58509ac86.jpg"
+            thumb_name = "https://telegra.ph/file/d3cd0d8da27cb2f0b9a62.jpg"
             duration = "NaN"
             views = "NaN"
             keyboard = InlineKeyboardMarkup(
