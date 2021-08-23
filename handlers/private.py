@@ -74,7 +74,7 @@ async def start(client: Client, message: Message):
                         "🛠 Repo", url="https://github.com/UserLazy/LazyMusicbot"
                     ),
                     InlineKeyboardButton(
-                        "💬 Group", url="https://t.me/OdaSupport"
+                        "💬 Group", url="https://t.me/AnimeIndoReborn"
                     )
                 ]
             ]
@@ -101,7 +101,7 @@ async def help(client: Client, message: Message):
             [
                 [
                     InlineKeyboardButton(
-                        "Group", url="https://t.me/OdaSupport"
+                        "Group", url="https://t.me/AnimeIndoReborn"
                     ),
                     InlineKeyboardButton(
                         "Updates", url="https://t.me/UserLazyXBot"
