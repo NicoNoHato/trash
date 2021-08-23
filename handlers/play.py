@@ -203,13 +203,13 @@ async def play(_, message: Message):
                     pass
                 except Exception:
                     await lel.edit(
-                        f"<b>🛑 Flood Wait Error 🛑</b> \n\!")
+                        f"<b>🛑 Flood Wait Error 🛑</b> \n\Hey {user.first_name}, Userbot tidak bisa bergabung karna terlalu sulit, cek apakah userbot terbanned pada grup atau tidak.!")
     try:
         await USER.get_chat(chid)
         # lmoa = await client.get_chat_member(chid,wew)
     except:
         await lel.edit(
-            f"<i>Hey {user.first_name}, assistant userbot is not in this chat, ask admin to send /play command for first time to add it.</i>")
+            f"<i>Hei {user.first_name}, Asisten Userbot tidak ada dalam grup, bilang ke admin untuk mengirim perintah /play atau menambah @JefMusik dengan manual!")
         return
     
     audio = (message.reply_to_message.audio or message.reply_to_message.voice) if message.reply_to_message else None
