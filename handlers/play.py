@@ -226,7 +226,7 @@ async def play(_, message: Message):
         thumb_name = "https://telegra.ph/file/d3cd0d8da27cb2f0b9a62.jpg"
         thumbnail = thumb_name
         duration = "NaN"
-        views = "NaN
+        views = "NaN"
 
         keyboard = InlineKeyboardMarkup(
             [
