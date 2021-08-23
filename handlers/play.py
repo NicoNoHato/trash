@@ -84,7 +84,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     Image.alpha_composite(image5, image6).save("temp.png")
     img = Image.open("temp.png")
     draw = ImageDraw.Draw(img)
-    font = ImageFont.truetype("etc/font.otf", 38)
+    font = ImageFont.truetype("etc/font.otf", 42)
     judul = ImageFont.truetype("etc/judul.ttf", 32)
     draw.text((305, 550), f"Judul: {title}", (0, 0, 0), font=judul)
     draw.text(
@@ -180,7 +180,7 @@ async def play(_, message: Message):
         for administrator in administrators:
             if administrator == message.from_user.id:
                 await lel.edit(
-                        "<b>Jangan lupa tambahin asisten ke grup.</b>",
+                        "<b>Lagi ngecek asistan bot.</b>",
                     )
                 try:
                     invitelink = await _.export_chat_invite_link(chid)
@@ -223,7 +223,7 @@ async def play(_, message: Message):
 
         file_name = get_file_name(audio)
         title = file_name
-        thumb_name = "https://telegra.ph/file/cd0b87484429704c7b935.png"
+        thumb_name = "https://telegra.ph/file/8156d9a462cfe542bb11c.jpg"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
         views = "Locally added"
@@ -239,7 +239,7 @@ async def play(_, message: Message):
         )
         
         requested_by = message.from_user.first_name
-        await generate_cover(requested_by, title, views, duration, thumbnail)  
+        await generate_cover(thumbnail)  
         file_path = await converter.convert(
             (await message.reply_to_message.download(file_name))
             if not path.isfile(path.join("downloads", file_name)) else file_name
