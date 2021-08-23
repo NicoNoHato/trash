@@ -34,7 +34,7 @@ def cb_admin_check(func: Callable) -> Callable:
         if cb.from_user.id in admemes:
             return await func(client, cb)
         else:
-            await cb.answer("You ain't allowed!", show_alert=True)
+            await cb.answer("Kamu ga diperbolehkan.", show_alert=True)
             return
 
     return decorator
@@ -85,13 +85,14 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     img = Image.open("temp.png")
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("etc/font.otf", 32)
-    draw.text((190, 550), f"Title: {title}", (255, 255, 255), font=font)
+    judul = ImageFont.truetype("etc/judul.otf", 32)
+    draw.text((190, 550), f"Judul: {title}", (255, 255, 255), font=judul)
     draw.text(
-        (190, 590), f"Duration: {duration}", (255, 255, 255), font=font
+        (190, 590), f"Durasi: {duration}", (255, 255, 255), font=font
     )
     draw.text((190, 630), f"Views: {views}", (255, 255, 255), font=font)
     draw.text((190, 670),
-        f"Added By: {requested_by}",
+        f"Ditambah oleh: {requested_by}",
         (255, 255, 255),
         font=font,
     )
@@ -156,13 +157,13 @@ async def m_cb(b, cb):
         await cb.message.delete()
 
 # play
-@Client.on_message(filters.command("play") & filters.group & ~filters.edited & ~filters.forwarded & ~filters.via_bot)
+@Client.on_message(filters.command("req") & filters.group & ~filters.edited & ~filters.forwarded & ~filters.via_bot)
 async def play(_, message: Message):
     global que
     global useer
     if message.chat.id in DISABLED_GROUPS:
         return
-    lel = await message.reply("🔄 **Processing...**")
+    lel = await message.reply("🔄 **Memproses ...**")
     
     administrators = await get_administrators(message.chat)
     chid = message.chat.id
@@ -170,7 +171,7 @@ async def play(_, message: Message):
     try:
         user = await USER.get_me()
     except:
-        user.first_name = "@OdaHelper"
+        user.first_name = "@JefMusik"
     usar = user
     wew = usar.id
     try:
@@ -179,30 +180,30 @@ async def play(_, message: Message):
         for administrator in administrators:
             if administrator == message.from_user.id:
                 await lel.edit(
-                        "<b>Remember to add helper to your channel</b>",
+                        "<b>Jangan lupa tambahin asisten ke grup.</b>",
                     )
                 try:
                     invitelink = await _.export_chat_invite_link(chid)
                 except:
                     await lel.edit(
-                        "<b>Add me as admin of yor group first</b>",
+                        "<b>Promosikan aku jadi Admin dulu.</b>",
                     )
                     return
 
                 try:
                     await USER.join_chat(invitelink)
                     await USER.send_message(
-                        message.chat.id, "Oda joined this group for playing music in VC"
+                        message.chat.id, "Jef Userbot telah bergabung ke grup untuk berpesta."
                     )
                     await lel.edit(
-                        "<b>Assistent joined this chat</b>",
+                        "<b>Asisten sudah masuk ke dalam grup.</b>",
                     )
                     
                 except UserAlreadyParticipant:
                     pass
                 except Exception:
                     await lel.edit(
-                        f"<b>🛑 Flood Wait Error 🛑</b> \n\Hey {user.first_name}, assistant userbot couldn't join your group due to heavy join requests. Make sure userbot is not banned in group and try again later!")
+                        f"<b>🛑 Flood Wait Error 🛑</b> \n\!")
     try:
         await USER.get_chat(chid)
         # lmoa = await client.get_chat_member(chid,wew)
