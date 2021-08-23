@@ -218,12 +218,12 @@ async def play(_, message: Message):
     if audio:
         if round(audio.duration / 60) > DURATION_LIMIT:
             raise DurationLimitError(
-                f"❌ Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!"
+                f"❌ Lagu lebih dari {DURATION_LIMIT} menit tidak diizinkan untuk diputar!"
             )
 
         file_name = get_file_name(audio)
         title = file_name
-        thumb_name = "https://telegra.ph/file/4f12c2ac49a0bd67e3076.jpg"
+        thumb_name = "https://telegra.ph/file/cd0b87484429704c7b935.png"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
         views = "Locally added"
@@ -231,10 +231,10 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("📖 Support", url=f"t.me/OdaSupport"),
-                    InlineKeyboardButton("📡 Updates", url=f"t.me/UserLazyXBot"),
+                    InlineKeyboardButton("📖 Support", url=f"t.me/AnimeIndoReborn"),
+                    InlineKeyboardButton("📡 Updates", url=f"t.me/AnimeIndoReborn"),
                 ],
-                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
             ]
         )
         
@@ -268,15 +268,15 @@ async def play(_, message: Message):
             keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🚨 Support", url=f"t.me/OdaSupport"),
-                    InlineKeyboardButton("📡 Updates", url=f"t.me/UserLazyXBot"),
+                    InlineKeyboardButton("🚨 Support", url=f"t.me/AnimeIndoReborn"),
+                    InlineKeyboardButton("📡 Updates", url=f"t.me/AnimeIndoReborn"),
                 ],
-                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
             ]
         )
         except Exception as e:
             title = "NaN"
-            thumb_name = "https://telegra.ph/file/4f12c2ac49a0bd67e3076.jpg"
+            thumb_name = "https://telegra.ph/file/a9d383d2e2ca58509ac86.jpg"
             duration = "NaN"
             views = "NaN"
             keyboard = InlineKeyboardMarkup(
@@ -290,18 +290,18 @@ async def play(_, message: Message):
                     ]
                 )
         if (dur / 60) > DURATION_LIMIT:
-             await lel.edit(f"❌ Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!")
+             await lel.edit(f"❌ Lagu lebih dari {DURATION_LIMIT} menit tidak diizinkan untuk diputar!")
              return
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)     
         file_path = await converter.convert(youtube.download(url))
     else:
         if len(message.command) < 2:
-            return await lel.edit("🧐 **What's the song you want to play?**")
-        await lel.edit("🔎 **Finding the song...**")
+            return await lel.edit("🧐 **Lagu apa yang mau kamu putar?**")
+        await lel.edit("🔎 **Mencoba mencari judul lagu ...**")
         query = message.text.split(None, 1)[1]
         # print(query)
-        await lel.edit("🎵 **Processing sounds...**")
+        await lel.edit("🎵 **Memproses Lagu ...**")
         try:
             results = YoutubeSearch(query, max_results=1).to_dict()
             url = f"https://youtube.com{results[0]['url_suffix']}"
@@ -324,7 +324,7 @@ async def play(_, message: Message):
                 
         except Exception as e:
             await lel.edit(
-                "❌ Song not found.\n\nTry another song or maybe spell it properly."
+                "❌ Lagu ga ketemu.\n\nCoba lagu lain, atau cari lagu dengan jelas dan benar."
             )
             print(str(e))
             return
@@ -332,15 +332,15 @@ async def play(_, message: Message):
         keyboard = InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton("🚨 Support", url=f"t.me/OdaSupport"),
-                    InlineKeyboardButton("📡 Updates", url=f"t.me/UserLazyXBot"),
+                    InlineKeyboardButton("🚨 Support", url=f"t.me/AnimeIndoReborn"),
+                    InlineKeyboardButton("📡 Updates", url=f"t.me/AnimeIndoReborn"),
                 ],
-                [InlineKeyboardButton(text="🗑 Close", callback_data="cls")],
+                [InlineKeyboardButton(text="🗑 Tutup", callback_data="cls")],
             ]
         )
         
         if (dur / 60) > DURATION_LIMIT:
-             await lel.edit(f"❌ Videos longer than {DURATION_LIMIT} minutes aren't allowed to play!")
+             await lel.edit(f"❌ Lagu lebih dari {DURATION_LIMIT} menit tidak diizinkan untuk diputar!")
              return
         requested_by = message.from_user.first_name
         await generate_cover(requested_by, title, views, duration, thumbnail)  
@@ -350,7 +350,7 @@ async def play(_, message: Message):
         position = await queues.put(message.chat.id, file=file_path)
         await message.reply_photo(
         photo="final.png", 
-        caption="**🎵 Song:** {}\n**🕒 Duration:** {} min\n**👤 Added By:** {}\n\n**#⃣ Queued Position:** {}".format(
+        caption="**🎵 Lagu:** {}\n**🕒 Durasi:** {} min\n**👤 Ditambah oleh:** {}\n\n**#⃣ Antrian ke:** {}".format(
         title, duration, message.from_user.mention(), position
         ),
         reply_markup=keyboard)
@@ -361,7 +361,7 @@ async def play(_, message: Message):
         await message.reply_photo(
         photo="final.png",
         reply_markup=keyboard,
-        caption="**🎵 Song:** {}\n**🕒 Duration:** {} min\n**👤 Added By:** {}\n\n**▶️ Now Playing at `{}`...**".format(
+        caption="**🎵 Lagu:** {}\n**🕒 Durasi:** {} min\n**👤 Ditambah oleh:** {}\n\n**▶️ Sedang diputar di `{}`...**".format(
         title, duration, message.from_user.mention(), message.chat.title
         ), )
         os.remove("final.png")
