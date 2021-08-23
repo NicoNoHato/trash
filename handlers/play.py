@@ -221,6 +221,7 @@ async def play(_, message: Message):
                 f"❌ Lagu lebih dari {DURATION_LIMIT} menit tidak diizinkan untuk diputar!"
             )
 
+        file_name = get_file_name(audio)
         title = "NaN"
         thumb_name = "https://telegra.ph/file/8156d9a462cfe542bb11c.jpg"
         thumbnail = thumb_name
