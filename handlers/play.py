@@ -221,8 +221,7 @@ async def play(_, message: Message):
                 f"❌ Lagu lebih dari {DURATION_LIMIT} menit tidak diizinkan untuk diputar!"
             )
 
-        file_name = get_file_name(audio)
-        title = file_name
+        title = "NaN"
         thumb_name = "https://telegra.ph/file/8156d9a462cfe542bb11c.jpg"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
@@ -239,7 +238,7 @@ async def play(_, message: Message):
         )
         
         requested_by = message.from_user.first_name
-        await generate_cover(thumbnail)  
+        await generate_cover(requested_by, title, views, durationthumbnail)  
         file_path = await converter.convert(
             (await message.reply_to_message.download(file_name))
             if not path.isfile(path.join("downloads", file_name)) else file_name
