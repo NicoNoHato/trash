@@ -76,7 +76,7 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
                 await f.close()
 
     image1 = Image.open("./background.png")
-    image2 = Image.open("etc/AR.jpg")
+    image2 = Image.open("etc/AR.png")
     image3 = changeImageSize(1280, 720, image1)
     image4 = changeImageSize(1280, 720, image2)
     image5 = image3.convert("RGBA")
@@ -86,12 +86,12 @@ async def generate_cover(requested_by, title, views, duration, thumbnail):
     draw = ImageDraw.Draw(img)
     font = ImageFont.truetype("etc/font.otf", 32)
     judul = ImageFont.truetype("etc/judul.otf", 32)
-    draw.text((190, 550), f"Judul: {title}", (255, 255, 255), font=judul)
+    draw.text((305, 550), f"Judul: {title}", (255, 255, 255), font=judul)
     draw.text(
-        (190, 590), f"Durasi: {duration}", (255, 255, 255), font=font
+        (305, 590), f"Durasi: {duration}", (255, 255, 255), font=font
     )
-    draw.text((190, 630), f"Views: {views}", (255, 255, 255), font=font)
-    draw.text((190, 670),
+    draw.text((305, 630), f"Views: {views}", (255, 255, 255), font=font)
+    draw.text((305, 670),
         f"Ditambah oleh: {requested_by}",
         (255, 255, 255),
         font=font,
