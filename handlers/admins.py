@@ -16,18 +16,18 @@ from callsmusic import callsmusic
 @authorized_users_only
 async def pause(_, message: Message):
     callsmusic.pytgcalls.pause_stream(message.chat.id)
-    await message.reply_text("⏸ Music Paused.")
+    await message.reply_text("⏸ Music dijeda.")
 
 
-@Client.on_message(command(["resume", "lanjut"]) & other_filters)
+@Client.on_message(command(["resume", "lanjut", "r"]) & other_filters)
 @errors
 @authorized_users_only
 async def resume(_, message: Message):
     callsmusic.pytgcalls.resume_stream(message.chat.id)
-    await message.reply_text("▶️ Music Resumed.")
+    await message.reply_text("▶️ Music diputar kembali.")
 
 
-@Client.on_message(command(["end", "stop"]) & other_filters)
+@Client.on_message(command(["end", "stop", "s"]) & other_filters)
 @errors
 @authorized_users_only
 async def stop(_, message: Message):
@@ -37,17 +37,17 @@ async def stop(_, message: Message):
        pass
 
     callsmusic.pytgcalls.leave_group_call(message.chat.id)
-    await message.reply_text("❌ **Stop the Song!**")
+    await message.reply_text("❌ **Musik telah berhenti.**")
 
 
-@Client.on_message(command("skip") & other_filters)
+@Client.on_message(command(["skip", "sk"]) & other_filters)
 @errors
 @authorized_users_only
 async def skip(_, message: Message):
     global que
     chat_id = get_chat_id(message.chat)
     if chat_id not in callsmusic.pytgcalls.active_calls:
-        await message.reply_text("❗ Nothing is playing to skip!")
+        await message.reply_text("❗ Tidak ada lagu untuk diskip.")
     else:
         callsmusic.queues.task_done(chat_id)
 
@@ -63,7 +63,7 @@ async def skip(_, message: Message):
         skip = qeue.pop(0)
     if not qeue:
         return
-    await message.reply_text(f"- Skipped **{skip[0]}**\n- Now Playing **{qeue[0][0]}**")
+    await message.reply_text(f"- Diskip **{skip[0]}**\n- Sekarang memutar **{qeue[0][0]}**")
 
 
 @Client.on_message(filters.command("reload"))
@@ -80,4 +80,4 @@ async def admincache(client, message: Message):
         ),
     )
 
-    await message.reply_text("✅️ **Admin List** is **updated**")
+    await message.reply_text("✅️ **Daftar admin telah terupdate**")
